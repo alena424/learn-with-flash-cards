@@ -2,6 +2,8 @@
     --primaryColor: #A8167F;
     --secondaryColor: #2C0064;
     --terciaryColor: #EAE2F3;
+    --correctColor: greenyellow;
+    --wrongColor: red;
     font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
 
@@ -13,6 +15,7 @@ body {
     font-size: 20px;
     margin: 50px 0 0 0;
     padding: 0;
+    min-width: 200px;
 }
 
 nav {
@@ -39,11 +42,14 @@ nav {
 }
 
 .cards {
-    padding-top: 10px;
+    padding: 10px 5px 0 5px;
+    justify-content: center;
     display: flex;
     gap: 20px;
     flex-direction: column;
     align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -53,6 +59,7 @@ nav {
     width: 95%;
     border-radius: 15px;
     overflow: hidden;
+    max-width: 350px;
 }
 
 .card-up {
@@ -104,6 +111,7 @@ nav i {
 }
 
 .flash-card {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -151,9 +159,27 @@ nav i {
 }
 
 .wrong {
-    background-color: red;
+    background-color: var(--wrongColor);
 }
 
 .correct {
-    background-color: greenyellow;
+    background-color: var(--correctColor);
+}
+
+.wrong-text {
+    color: var(--wrongColor);
+}
+
+.correct-text {
+    color: var(--correctColor);
+}
+
+.primary-button {
+    background-color: var(--primaryColor);
+}
+
+.question-text {
+    margin: 15px;
+    text-align: center;
+    overflow-y: auto;
 }
