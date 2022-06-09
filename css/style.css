@@ -1,0 +1,158 @@
+:root {
+    --primaryColor: #A8167F;
+    --secondaryColor: #2C0064;
+    --terciaryColor: #EAE2F3;
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 20px;
+    margin: 50px 0 0 0;
+    padding: 0;
+}
+
+nav {
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+    background-color: var(--secondaryColor);
+    color: white;
+    padding: 5px 20px 5px 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+}
+
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-image: url("../img/profile.jpg");
+    background-size: cover;
+}
+
+.cards{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 95%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-up {
+    flex: 3;
+    overflow: hidden;
+}
+
+.card-up img {
+    width: 100%;
+}
+
+.card-down {
+    flex: 1;
+    height: auto;
+    padding: 15px;
+    background-color: var(--terciaryColor);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bolder;
+    padding-bottom: 5px;
+}
+
+.card-subtitle {
+    color: #303030;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav i {
+    padding-right: 15px;
+}
+
+.gradient-background {
+    clip-path: polygon(0% 0%, 100% 0, 100% 100%, 50% 82%, 0 100%);
+    background: linear-gradient(353.84deg, #6A00F0 -77.49%, #820B76 -38.47%, #A8167F 11.58%, #2C0064 85.38%);
+    width: 100%;
+    height: 350px;
+}
+.chip {
+    background-color: var(--terciaryColor);
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+    width: fit-content;
+}
+
+.flash-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.flash-card-wrapper {
+    position: fixed;
+    top: 150px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.practise {
+    background-color: var(--terciaryColor);
+}
+
+.buttons {
+    bottom: 20px;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+    color: white;
+    border-radius: 10px;
+    padding: 20px 40px 20px 40px;
+}
+
+.text-button {
+    text-transform: uppercase;
+    color: var(--primaryColor);
+}
+
+.button, .text-button:hover{
+    cursor: pointer;
+}
+
+.wrong {
+    background-color: red;
+}
+
+.correct {
+    background-color: greenyellow;
+}

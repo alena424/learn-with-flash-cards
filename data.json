@@ -1,0 +1,30 @@
+{
+  "last_updated": "6.9.2022",
+  "last_updated": "Alena Tesařová",
+  "data": [
+    {
+      "category": "English",
+      "title": "Common words",
+      "photo_url": "",
+      "cards": [
+        {
+          "question": "Kalkulačka",
+          "answer": "Calculator",
+          "memorized": 0
+        }
+      ]
+    },
+    {
+      "category": "Sport",
+      "photo_url": "",
+      "title": "Famous Athletes",
+      "cards": []
+    },
+    {
+      "category": "Geology",
+      "photo_url": "",
+      "title": "Planets",
+      "cards": []
+    }
+  ]
+}
