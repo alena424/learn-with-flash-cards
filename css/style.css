@@ -38,9 +38,10 @@ nav {
     background-size: cover;
 }
 
-.cards{
-    padding: 10px;
+.cards {
+    padding-top: 10px;
     display: flex;
+    gap: 20px;
     flex-direction: column;
     align-items: center;
 }
