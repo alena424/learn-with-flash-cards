@@ -1,4 +1,6 @@
 let data = []; // data from json file
+
+/***** DOM element's reference ************/
 let cardsElement;
 let navElement;
 let flashCardElement;
@@ -13,18 +15,20 @@ let counter;
 let correctAnswers;
 let wrongAnswers;
 
+
 $(document).ready(function () {
     // load json data
     $.getJSON("data.json", function (json) {
         data = json.data; // this will show the info it in firebug console
-        goToMainPage()
+        goToMainPage();
     });
+    // init reference to DOM elements
     cardsElement = $(".cards");
     navElement = $("nav");
     flashCardElement = $(".flash-card-wrapper");
     buttons = $(".buttons");
-    body = $("body")
-    gradientBackgroundElement = $(".gradient-background")
+    body = $("body");
+    gradientBackgroundElement = $(".gradient-background");
 });
 
 /**
@@ -32,8 +36,9 @@ $(document).ready(function () {
  */
 function displayCards() {
     let htmlCode = "";
+    // foreach all data and for each category, create a card with image and title
     for (let i = 0; i < data.length; i++) {
-        const { category, title, photo_url, cards } = data[i]
+        const {category, title, photo_url, cards} = data[i]
         htmlCode = htmlCode + `
         <div class="card" onclick="learnByCategory(${i})">
             <img class="card-up" src="${photo_url}" alt=${title}>
@@ -45,16 +50,15 @@ function displayCards() {
                     Number of cards: ${cards.length}
                 </div>
             </div>
-        </div>
-            `
+        </div>`
     }
-    cardsElement.html(htmlCode);
+    cardsElement.html(htmlCode); // add HTML content to the page
 }
 
 /**
- * Function initialize the main page and clear all unnecessary elements
+ * Function initializes the main page and clear all unnecessary elements
  */
-function goToMainPage(){
+function goToMainPage() {
     buttons.html("")
     flashCardElement.html("")
     gradientBackgroundElement.hide();
@@ -73,102 +77,117 @@ function goToMainPage(){
 /**
  * Init all global variables for flash cards
  */
-function initVariables(){
+function initVariables() {
     isAnswerVisible = false;
     selectedCategoryIndex = 0;
     counter = 0;
     correctAnswers = [];
     wrongAnswers = [];
 }
+
 /**
  * Function with displaying flash cards and learning mode
  * @param index index of selected category
  */
-function learnByCategory(index){
+function learnByCategory(index) {
     initVariables() // init all globals
     selectedCategoryIndex = index; // set index of learning category
-    const { category, title, cards } = data[index]
-    if (cards.length <= counter){
+    const {category, title, cards} = data[index]; // destruct data
+    if (cards.length <= counter) {
         // prevent out of array
-        goToMainPage()
-        return
+        goToMainPage();
+        return;
     }
-    cardsElement.html("") // delete cards on the main screen as we don't need them
+    cardsElement.html(""); // delete cards on the main screen as we don't need them
     navElement.html(`
          <div onclick="goToMainPage()">
             <i class="fa-solid fa-angle-left"></i>
             ${category} - ${title}
         </div>
-    `)
+    `);
     flashCardElement.show();
     gradientBackgroundElement.show();
-    drawFlashCard()
+    drawFlashCard();
     buttons.html(
         `
         <div class="button wrong" onclick="onWrong()">Wrong</div>
         <div class="button correct" onclick="onCorrect()">Correct</div>
         `
-    )
-    body.addClass("practise")
-}
-
-function drawFlashCard() {
-    const { cards } = data[selectedCategoryIndex]
-    const { question, answer } = cards[counter];
-    const questionText = isAnswerVisible ? answer : question
-    const buttonText = isAnswerVisible ? "Hide answer" : "Show answer"
-    flashCardElement.html(`
-          <div class="flash-card">
-            <div class="chip">${counter+1}/${cards.length}</div>
-            <div class="question-text">${questionText}</div>
-            <div class="text-button" onclick="swapAnswerVisibility()">${buttonText}</div>
-        </div>
-    `)
+    );
+    body.addClass("practise");
 }
 
 /**
- * Swap card answer visibility
+ * Function takes care of displaying flash card
+ * it takes into account isAnswerVisible var
  */
-function swapAnswerVisibility(){
-    isAnswerVisible = !isAnswerVisible
-    drawFlashCard()
+function drawFlashCard() {
+    const {cards} = data[selectedCategoryIndex];
+    const {question, answer} = cards[counter];
+    const questionText = isAnswerVisible ? answer : question;
+    const buttonText = isAnswerVisible ? "Hide answer" : "Show answer";
+    flashCardElement.html(`
+          <div class="flash-card">
+            <div class="chip">${counter + 1}/${cards.length}</div>
+            <div class="question-text">${questionText}</div>
+            <div class="text-button" onclick="toggleAnswerVisibility()">${buttonText}</div>
+        </div>
+    `);
 }
 
-function nextCard(){
+/**
+ * Toggle card answer visibility
+ */
+function toggleAnswerVisibility() {
+    isAnswerVisible = !isAnswerVisible;
+    drawFlashCard();
+}
+
+/**
+ * Increment counter and either goes to summary or displays next flash card
+ */
+function nextCard() {
     isAnswerVisible = false;
-    const { cards } = data[selectedCategoryIndex]
-    if (counter >= cards.length - 1){
-        goToSummary()
+    const {cards} = data[selectedCategoryIndex];
+    if (counter >= cards.length - 1) {
+        goToSummary();
     } else {
         counter = counter + 1; // lets go to next question
-        drawFlashCard()
+        drawFlashCard();
     }
 }
 
-function onCorrect(){
+/**
+ * Save correct answer and call nextCard
+ */
+function onCorrect() {
     correctAnswers.push(counter);
-    nextCard()
+    nextCard();
 }
 
-function onWrong(){
+/**
+ * Save wrong answer and call nextCard
+ */
+function onWrong() {
     wrongAnswers.push(counter);
-    nextCard()
+    nextCard();
 }
 
-function goToSummary(){
+/**
+ * Creates summary content with num of wrong and correct answers
+ */
+function goToSummary() {
     flashCardElement.html(
-        `
-        <div class="flash-card">
+        `<div class="flash-card">
             <h2>Summary</h2>
             <div>
                 <div class="correct-text">Correct answers: ${correctAnswers.length}</div>
                 <br/>
                 <div class="wrong-text">Wrong answers: ${wrongAnswers.length}</div>
             </div>
-        </div>
-        `
-    )
-    buttons.html( `
+        </div>`
+    );
+    buttons.html(`
         <div class="button primary-button" onclick="learnByCategory(selectedCategoryIndex)">Repeat cards</div>
-    `)
+    `);
 }
