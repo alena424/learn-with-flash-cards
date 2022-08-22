@@ -1,4 +1,5 @@
-{
+// data declaration
+window.dataJson = {
   "last_update": "6.9.2022",
   "last_updated": "Alena Tesařová",
   "data": [

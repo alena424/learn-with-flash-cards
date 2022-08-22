@@ -17,11 +17,6 @@ let wrongAnswers;
 
 
 $(document).ready(function () {
-    // load json data
-    $.getJSON("data.json", function (json) {
-        data = json.data; // this will show the info it in firebug console
-        goToMainPage();
-    });
     // init reference to DOM elements
     cardsElement = $(".cards");
     navElement = $("nav");
@@ -29,6 +24,10 @@ $(document).ready(function () {
     buttons = $(".buttons");
     body = $("body");
     gradientBackgroundElement = $(".gradient-background");
+
+    // load json data
+    data = window.dataJson.data;
+    goToMainPage();
 });
 
 /**
