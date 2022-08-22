@@ -46,7 +46,6 @@ nav {
     justify-content: center;
     display: flex;
     gap: 20px;
-    flex-direction: column;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
@@ -60,22 +59,15 @@ nav {
     border-radius: 15px;
     overflow: hidden;
     max-width: 350px;
+    background-color: var(--terciaryColor);
 }
 
-.card-up {
-    flex: 3;
+.card img {
     overflow: hidden;
 }
 
-.card-up img {
-    width: 100%;
-}
-
 .card-down {
-    flex: 1;
-    height: auto;
     padding: 15px;
-    background-color: var(--terciaryColor);
 }
 
 .card-title {
